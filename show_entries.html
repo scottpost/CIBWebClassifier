@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if logged %}
+      <h3>How to complete</h3>
+      <ul style = "list-style-type: decimal">
+        <li>Press the generate random sentences button
+        <br>
+        <li>For each sentence, check the appropriate sentiment boxes. (A sentence CANNOT be both Positive & Negative or both Strong & Weak).
+        <br><span style = "font-weight: bold">We would like for you to grade the sentences based on how they are written, rather than what they say.</span>
+        <br>* If you don't think the sentence has any sentiment, leave all checkboxes BLANK
+        <br>
+        <li>After you have classified each sentence, press the submit button.<br>
+        <li>If you would like to keep classifying, press the generate random sentences button and repeat.
+      <br>
+      <br>
+      <form action = "/classify" method="post">
+        <button name = "button" value = "generate" type="submit">Generate random sentences</button>
+      </form>
+      <br>
+      <form action = "/classify" method="post">
+        <button name = "button" value = "generateArticle" type="submit">Generate random article</button>
+      </form>
+      <br>
+      <form action = "/classify" method=post>
+        <table class=entries>
+           <tr>
+            <th>Sentence
+            <th>Positive
+            <th>Negative
+            <th>Strong
+            <th>Weak
+          </tr>
+        {% for sentence in sentences %}
+          <tr>
+            <td>{{ sentence }}
+            <td><input type="checkbox" name="Positive" value="{{ sentence }}"/>
+            <td><input type="checkbox" name="Negative" value="{{ sentence }}"/>
+            <td><input type="checkbox" name="Strong" value="{{ sentence }}"/>
+            <td><input type="checkbox" name="Weak" value = "{{ sentence }}"/>
+          <tr>
+        {% else %}
+          <em>You have not generated any sentences yet.</em>
+        {% endfor %}
+        </table>
+        <br>
+        <button name = "button" value = "submit" type="submit">Submit your classification</button>
+      </form>
+    {% else %}
+        <br>
+        <h2>Please enter your CIB username and password</h2>
+        <br>
+        <form action="." method="POST">
+            Username: <input type="text" name="username">
+            Password: <input type="text" name="password">
+            <input type="submit" name="my-form" value="Login">
+        </form>
+    {% endif %}
+{% endblock %}
+
+

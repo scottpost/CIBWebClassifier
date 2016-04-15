@@ -1,0 +1,15 @@
+<!doctype html>
+<title>CIB Article Classifier</title>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<div class=page>
+  <h1>CIB Article Classifier</h1>
+  <div class=metanav>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>
+
